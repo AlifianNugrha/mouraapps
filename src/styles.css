@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,300;1,14..32,400;1,14..32,500&display=swap");
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design System from DESIGN (1).md
+ * Bauhaus studio notebook — eggshell canvas, black ink, warm taupe surfaces, stone hairline dividers.
+ */
+
+:root {
+  /* Clean Modern Pure White & Neutral Palette */
+  --color-eggshell: #ffffff;
+  --color-warm-taupe: #f8fafc;
+  --color-stone: #e2e8f0;
+  --color-ink: #000000;
+  --color-graphite: #334155;
+  --color-smoke: #64748b;
+  --color-ash: #94a3b8;
+  --color-violet-spark: #0447ff;
+  --color-ember-orange: #ff4704;
+
+  /* Semantic Mappings */
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: #000000;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #000000;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #000000;
+  --radius: 20px;
+}
+
+@theme inline {
+  --color-eggshell: var(--color-eggshell);
+  --color-warm-taupe: var(--color-warm-taupe);
+  --color-stone: var(--color-stone);
+  --color-ink: var(--color-ink);
+  --color-graphite: var(--color-graphite);
+  --color-smoke: var(--color-smoke);
+  --color-ash: var(--color-ash);
+  --color-violet-spark: var(--color-violet-spark);
+  --color-ember-orange: var(--color-ember-orange);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Inter Tight", "Waldenburg", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.01em;
+  }
+
+  /* Display headlines whisper-weight 300 with -0.02em tracking */
+  h1, h2, h3, .font-display {
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Scroll-triggered Fade-Up Animation */
+.fade-up {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.fade-up.in-view {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.delay-75  { transition-delay: 75ms; }
+.delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-250 { transition-delay: 250ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Video Fade-In at the beginning of playback */
+@keyframes videoFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.video-fade-in {
+  animation: videoFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity;
+}
+
+/* Feature 1: Soundwave Recording Animation */
+@keyframes waveBounce {
+  0%, 100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1.3);
+  }
+}
+.animate-wave {
+  animation: waveBounce 1.2s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+/* Feature 2: Avatar Gentle Floating & Wink */
+@keyframes avatarFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+.animate-avatar-float {
+  animation: avatarFloat 3s ease-in-out infinite;
+}
+
+@keyframes eyeBlink {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+.animate-eye-blink {
+  animation: eyeBlink 3.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Feature 3: Laser Scanline */
+@keyframes scanline {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(250%);
+    opacity: 0;
+  }
+}
+.animate-scanline {
+  animation: scanline 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Feature 5: Breathing Pulse */
+@keyframes breathPulse {
+  0%, 100% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+.animate-breath {
+  animation: breathPulse 4s ease-in-out infinite;
+}
+
+/* Feature 6: Sparkling Stars Burst */
+@keyframes sparkleFloat {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8) rotate(90deg) translateY(-8px);
+    opacity: 0;
+  }
+}
+.animate-sparkle-1 {
+  animation: sparkleFloat 2s ease-in-out infinite;
+}
+.animate-sparkle-2 {
+  animation: sparkleFloat 2.3s ease-in-out 0.6s infinite;
+}
+.animate-sparkle-3 {
+  animation: sparkleFloat 2.1s ease-in-out 1.2s infinite;
+}
+
+/* Feature 7: Bell Ring & Phone Vibration */
+@keyframes bellJiggle {
+  0%, 80%, 100% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(-15deg);
+  }
+  90% {
+    transform: rotate(15deg);
+  }
+  95% {
+    transform: rotate(-10deg);
+  }
+}
+.animate-bell-ring {
+  animation: bellJiggle 2.8s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes phoneShake {
+  0%, 85%, 100% {
+    transform: translateX(0);
+  }
+  88% {
+    transform: translateX(-2px) rotate(-0.5deg);
+  }
+  91% {
+    transform: translateX(2px) rotate(0.5deg);
+  }
+  94% {
+    transform: translateX(-2px);
+  }
+  97% {
+    transform: translateX(1px);
+  }
+}
+.animate-phone-vibrate {
+  animation: phoneShake 3s ease-in-out infinite;
+}
+
